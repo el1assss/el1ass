@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>el1ass</title>
+  <meta
+    name="description"
+    content="EL1ASS music producer, mix and mastering engineer. Credits, beat previews, SoundCloud, Instagram and kit store."
+  >
+  <link rel="icon" type="image/png" href="weblogo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet"
+  >
+  <style>
+    :root {
+      --bg: #131936;
+      --bg-soft: #1b244e;
+      --bg-deep: #0f1531;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-strong: rgba(255, 255, 255, 0.08);
+      --line: rgba(255, 255, 255, 0.12);
+      --text: #f5f7ff;
+      --muted: #a9b3da;
+      --accent: #7fb3ff;
+      --accent-soft: rgba(127, 179, 255, 0.16);
+      --max: 1180px;
+      --radius: 28px;
+      --window-h: min(72svh, 760px);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(127, 179, 255, 0.22), transparent 24%),
+        radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.08), transparent 16%),
+        radial-gradient(circle at 50% 100%, rgba(127, 179, 255, 0.08), transparent 22%),
+        var(--bg);
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: radial-gradient(circle at center, black, transparent 82%);
+      pointer-events: none;
+      opacity: 0.18;
+    }
+
+    body.cursor-enabled,
+    body.cursor-enabled a,
+    body.cursor-enabled button,
+    body.cursor-enabled input,
+    body.cursor-enabled label {
+      cursor: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .cursor-dot,
+    .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      transition:
+        width 180ms ease,
+        height 180ms ease,
+        opacity 180ms ease,
+        background 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background: #ffffff;
+      box-shadow: 0 0 22px rgba(127, 179, 255, 0.6);
+    }
+
+    .cursor-ring {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(127, 179, 255, 0.7);
+      background: rgba(127, 179, 255, 0.08);
+      backdrop-filter: blur(4px);
+    }
+
+    body.cursor-enabled .cursor-dot,
+    body.cursor-enabled .cursor-ring {
+      opacity: 1;
+    }
+
+    body.cursor-hover .cursor-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+    }
+
+    body.cursor-hover .cursor-ring {
+      width: 48px;
+      height: 48px;
+      border-color: rgba(127, 179, 255, 0.95);
+      background: rgba(127, 179, 255, 0.12);
+      box-shadow: 0 0 30px rgba(127, 179, 255, 0.18);
+    }
+
+    .page {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .screen {
+      min-height: 100svh;
+      scroll-snap-align: start;
+      display: grid;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .section-label {
+      color: var(--accent);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      letter-spacing: -0.05em;
+    }
+
+    h1 {
+      margin-top: 12px;
+      font-size: clamp(3.2rem, 9vw, 6rem);
+      line-height: 0.9;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 0.95;
+    }
+
+    .hero-panel,
+    .window-card,
+    .artist-card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.05));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 26px 90px rgba(8, 12, 35, 0.3);
+    }
+
+    .hero-panel {
+      padding: 24px 26px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      right: -100px;
+      top: -100px;
+      background: radial-gradient(circle, rgba(127, 179, 255, 0.35), transparent 68%);
+      pointer-events: none;
+    }
+
+    .lead {
+      max-width: 34rem;
+      margin: 14px 0 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.96rem;
+    }
+
+    .hero-actions {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 14px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .button:hover,
+    .artist-card:hover,
+    .finder-row:hover,
+    .player-button:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.26);
+    }
+
+    .button-primary,
+    .player-button-primary {
+      background: var(--accent);
+      color: #0d1430;
+      border-color: transparent;
+    }
+
+    .screen-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .screen-copy {
+      max-width: 28rem;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .window-card {
+      height: var(--window-h);
+      overflow: hidden;
+    }
+
+    .credits-shell {
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .credits-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .credits-kicker,
+    .credits-count {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .credits-scroll {
+      overflow: auto;
+      padding: 16px;
+    }
+
+    .credits-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .artist-card {
+      padding: 16px;
+      transition: transform 160ms ease, border-color 160ms ease;
+    }
+
+    .artist-photo {
+      aspect-ratio: 1 / 1;
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--bg-soft);
+      margin-bottom: 14px;
+    }
+
+    .artist-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .artist-name {
+      font-size: 1.02rem;
+      font-weight: 800;
+    }
+
+    .artist-track {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.93rem;
+    }
+
+    .finder-window {
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.055);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 24px 80px rgba(5, 10, 30, 0.28);
+      height: 100%;
+    }
+
+    .finder-titlebar,
+    .finder-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .finder-dots {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-width: 56px;
+    }
+
+    .finder-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    .finder-dot--red { background: #ff5f57; }
+    .finder-dot--yellow { background: #febc2e; }
+    .finder-dot--green { background: #28c840; }
+
+    .finder-window-title {
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-align: center;
+      flex: 1;
+    }
+
+    .finder-titlebar-meta,
+    .finder-breadcrumb,
+    .finder-count,
+    .finder-sidebar-label,
+    .finder-row-kind,
+    .finder-row-collab,
+    .preview-collab {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.92rem;
+    }
+
+    .finder-titlebar-meta {
+      min-width: 56px;
+      text-align: right;
+    }
+
+    .finder-body {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      min-height: calc(100% - 98px);
+    }
+
+    .finder-sidebar {
+      padding: 14px;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .finder-sidebar-label {
+      margin: 0 0 10px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .finder-sidebar-item {
+      display: flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 0 12px;
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 0.94rem;
+      border: 1px solid transparent;
+      background: transparent;
+    }
+
+    .finder-sidebar-item + .finder-sidebar-item {
+      margin-top: 6px;
+    }
+
+    .finder-sidebar-item.is-active {
+      background: rgba(127, 179, 255, 0.14);
+      border-color: rgba(127, 179, 255, 0.18);
+    }
+
+    .finder-main {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      min-width: 0;
+    }
+
+    .finder-columns,
+    .finder-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) 80px;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .finder-columns {
+      padding: 10px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .finder-list {
+      padding: 8px;
+      display: grid;
+      gap: 6px;
+      overflow: auto;
+    }
+
+    .finder-row {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      background: transparent;
+      color: var(--text);
+      font: inherit;
+      text-align: left;
+      transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+    }
+
+    .finder-row:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .finder-row.is-active {
+      background: linear-gradient(180deg, rgba(127, 179, 255, 0.2), rgba(127, 179, 255, 0.12));
+      border-color: rgba(127, 179, 255, 0.22);
+    }
+
+    .finder-row-name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      font-weight: 700;
+    }
+
+    .finder-row-name::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      flex: 0 0 auto;
+      border-radius: 3px;
+      background: rgba(127, 179, 255, 0.9);
+      box-shadow: 0 0 14px rgba(127, 179, 255, 0.4);
+    }
+
+    .finder-row-name-text,
+    .finder-row-collab {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .finder-player {
+      padding: 14px 16px 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.025);
+      display: grid;
+      gap: 12px;
+    }
+
+    .preview-collab {
+      margin: 0;
+    }
+
+    .preview-partner {
+      color: var(--text);
+      text-decoration: underline;
+      text-decoration-color: rgba(127, 179, 255, 0.55);
+      text-underline-offset: 0.18em;
+    }
+
+    .player-shell {
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .player-main {
+      display: grid;
+      gap: 10px;
+    }
+
+    .player-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .player-button {
+      cursor: pointer;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      min-height: 42px;
+      padding: 10px 15px;
+      border-radius: 999px;
+      font: inherit;
+      font-size: 0.92rem;
+      font-weight: 700;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .player-transport {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .player-status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .progress-wrap {
+      display: grid;
+      gap: 8px;
+    }
+
+    .progress-slider,
+    .volume-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      outline: none;
+    }
+
+    .progress-slider::-webkit-slider-thumb,
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 0;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(127, 179, 255, 0.16);
+      cursor: pointer;
+    }
+
+    .progress-slider::-moz-range-thumb,
+    .volume-slider::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 0;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(127, 179, 255, 0.16);
+      cursor: pointer;
+    }
+
+    .progress-slider {
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .volume-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 42px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .volume-slider {
+      width: 92px;
+      cursor: pointer;
+    }
+
+    .volume-value {
+      min-width: 42px;
+      color: var(--text);
+      font-weight: 700;
+      text-align: right;
+    }
+
+    @media (max-width: 980px) {
+      .credits-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .finder-body {
+        grid-template-columns: 1fr;
+      }
+
+      .finder-sidebar {
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+    }
+
+    @media (max-width: 720px) {
+      body {
+        scroll-snap-type: none;
+      }
+
+      .page {
+        width: min(calc(100% - 20px), var(--max));
+      }
+
+      .screen {
+        min-height: auto;
+        scroll-snap-align: none;
+        padding: 12px 0 18px;
+      }
+
+      .section-label {
+        font-size: 0.7rem;
+        letter-spacing: 0.16em;
+      }
+
+      h1 {
+        font-size: clamp(2.65rem, 14vw, 4rem);
+      }
+
+      h2 {
+        font-size: clamp(1.7rem, 8vw, 2.4rem);
+      }
+
+      .lead,
+      .screen-copy {
+        max-width: none;
+        font-size: 0.9rem;
+      }
+
+      .hero-panel {
+        padding: 18px;
+        border-radius: 24px;
+      }
+
+      .hero-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .button {
+        min-height: 48px;
+        padding: 12px 14px;
+        font-size: 0.9rem;
+      }
+
+      .screen-head {
+        align-items: start;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      .window-card,
+      .finder-window {
+        height: auto;
+      }
+
+      .credits-shell,
+      .credits-scroll,
+      .finder-list {
+        overflow: visible;
+      }
+
+      .credits-top,
+      .finder-titlebar,
+      .finder-toolbar,
+      .finder-player {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      .credits-top {
+        padding-top: 14px;
+        padding-bottom: 14px;
+      }
+
+      .credits-scroll {
+        padding: 12px;
+      }
+
+      .credits-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .artist-card {
+        display: grid;
+        grid-template-columns: 88px minmax(0, 1fr);
+        gap: 12px;
+        align-items: center;
+        padding: 14px;
+      }
+
+      .artist-photo {
+        width: 88px;
+        aspect-ratio: 1 / 1;
+        margin-bottom: 0;
+        border-radius: 16px;
+      }
+
+      .artist-track {
+        margin-top: 6px;
+      }
+
+      .finder-titlebar-meta {
+        display: none;
+      }
+
+      .finder-toolbar {
+        gap: 8px;
+      }
+
+      .finder-breadcrumb,
+      .finder-count {
+        font-size: 0.84rem;
+      }
+
+      .finder-sidebar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 10px 12px;
+      }
+
+      .finder-sidebar-label {
+        display: none;
+      }
+
+      .finder-sidebar-item {
+        flex: 0 0 auto;
+        min-height: 38px;
+        padding: 0 12px;
+        white-space: nowrap;
+        font-size: 0.88rem;
+      }
+
+      .finder-columns {
+        display: none;
+      }
+
+      .finder-list {
+        padding: 8px;
+        gap: 8px;
+      }
+
+      .finder-row {
+        grid-template-columns: 1fr auto;
+        gap: 8px 10px;
+        padding: 12px;
+      }
+
+      .finder-row-name {
+        grid-column: 1 / -1;
+      }
+
+      .finder-row-collab {
+        font-size: 0.84rem;
+      }
+
+      .finder-row-kind {
+        display: none;
+      }
+
+      .player-shell {
+        padding: 12px;
+      }
+
+      .player-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .player-transport {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+      }
+
+      .player-button {
+        width: 100%;
+      }
+
+      .volume-wrap {
+        width: 100%;
+        gap: 10px;
+      }
+
+      .volume-slider {
+        width: auto;
+        min-width: 0;
+        flex: 1;
+      }
+
+      .player-status {
+        flex-direction: column;
+        align-items: start;
+        gap: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="screen" id="top">
+      <div class="hero-panel">
+        <div class="section-label">Music Producer</div>
+        <h1>elias (el1ass)</h1>
+        <p class="lead">German multi-genre producer, mix &amp; mastering engineer, 17.</p>
+        <div class="hero-actions" aria-label="Main links">
+          <a class="button button-primary" href="https://www.instagram.com/prod.el1ass/" target="_blank" rel="noreferrer">Instagram</a>
+          <a class="button" href="https://soundcloud.com/el1asss" target="_blank" rel="noreferrer">SoundCloud</a>
+          <a class="button" href="https://payhip.com/el1ass" target="_blank" rel="noreferrer">Kit Store</a>
+          <a class="button" href="#credits">Credits</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" id="credits">
+      <div>
+        <div class="screen-head">
+          <div>
+            <div class="section-label">worked with:</div>
+            <h2>Selected credits</h2>
+          </div>
+        </div>
+
+        <div class="window-card">
+          <div class="credits-shell">
+            <div class="credits-top">
+              <span class="credits-kicker">Public credits</span>
+              <span class="credits-count">5 artists</span>
+            </div>
+
+            <div class="credits-scroll">
+              <div class="credits-grid">
+                <a class="artist-card" href="https://open.spotify.com/artist/3hW0x67fpZ7KdQwRzsBZNp" target="_blank" rel="noreferrer">
+                  <div class="artist-photo">
+                    <img src="https://i.scdn.co/image/ab6761610000e5eb84ec02f9a9670c578e5c819a" alt="Young Bowzer Spotify profile picture" loading="lazy">
+                  </div>
+                  <div>
+                    <p class="artist-name">Young Bowzer</p>
+                    <p class="artist-track">Dove Soap - produced<br>Wit' Ya - produced</p>
+                  </div>
+                </a>
+
+                <a class="artist-card" href="https://open.spotify.com/artist/6T1qJBpEH6hQLq3Vdz3Q4l" target="_blank" rel="noreferrer">
+                  <div class="artist-photo">
+                    <img src="https://i.scdn.co/image/ab6761610000e5eb456a0a6b693672e7e869b103" alt="Dan Off The Dome Spotify profile picture" loading="lazy">
+                  </div>
+                  <div>
+                    <p class="artist-name">Dan Off The Dome</p>
+                    <p class="artist-track">Dove Soap - produced</p>
+                  </div>
+                </a>
+
+                <a class="artist-card" href="https://open.spotify.com/artist/0S0byY4si9MvEgvr31ewyZ" target="_blank" rel="noreferrer">
+                  <div class="artist-photo">
+                    <img src="https://i.scdn.co/image/ab6761610000e5eb7417e77bb50717da2835a671" alt="LIL MOD9 Spotify profile picture" loading="lazy">
+                  </div>
+                  <div>
+                    <p class="artist-name">LIL MOD9</p>
+                    <p class="artist-track">FRIENDZONE - mastered</p>
+                  </div>
+                </a>
+
+                <a class="artist-card" href="https://open.spotify.com/artist/4b0XurRGfnMDNv2BPuQDAx" target="_blank" rel="noreferrer">
+                  <div class="artist-photo">
+                    <img src="https://i.scdn.co/image/ab6761610000e5eba4ee70fe139121c77646d267" alt="KYTO Spotify profile picture" loading="lazy">
+                  </div>
+                  <div>
+                    <p class="artist-name">KYTO</p>
+                    <p class="artist-track">CHANEL - mix &amp; master<br>shades an - mix &amp; master</p>
+                  </div>
+                </a>
+
+                <a class="artist-card" href="https://open.spotify.com/intl-de/artist/1zDnARSHiWiOGH7QmiHORQ?si=lB3tsgCERJGvlBd17mSpPw" target="_blank" rel="noreferrer">
+                  <div class="artist-photo">
+                    <img src="https://i.scdn.co/image/ab6761610000e5eb803da9edb375a381b3a2214b" alt="65Goonz Spotify profile picture" loading="lazy">
+                  </div>
+                  <div>
+                    <p class="artist-name">65Goonz</p>
+                    <p class="artist-track">unreleased - produced</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" id="previews">
+      <div>
+        <div class="screen-head">
+          <div>
+            <div class="section-label">previews</div>
+            <h2>Beat previews</h2>
+          </div>
+        </div>
+
+        <div class="window-card">
+          <div class="finder-window">
+            <div class="finder-titlebar">
+              <div class="finder-dots" aria-hidden="true">
+                <span class="finder-dot finder-dot--red"></span>
+                <span class="finder-dot finder-dot--yellow"></span>
+                <span class="finder-dot finder-dot--green"></span>
+              </div>
+              <div class="finder-window-title">Beat Previews</div>
+              <div class="finder-titlebar-meta">Local files</div>
+            </div>
+
+            <div class="finder-toolbar">
+              <span class="finder-breadcrumb">elias / previews</span>
+              <span class="finder-count">5 items</span>
+            </div>
+
+            <div class="finder-body">
+              <aside class="finder-sidebar" aria-label="Preview library">
+                <p class="finder-sidebar-label">Library</p>
+                <div class="finder-sidebar-item is-active">All previews</div>
+                <div class="finder-sidebar-item">Collaborations</div>
+                <div class="finder-sidebar-item">Local mp3</div>
+              </aside>
+
+              <div class="finder-main">
+                <div class="finder-columns">
+                  <span>Name</span>
+                  <span>With</span>
+                  <span>Kind</span>
+                </div>
+
+                <div class="finder-list">
+                  <button
+                    class="finder-row is-active"
+                    type="button"
+                    data-preview-label="preview-01.mp3"
+                    data-preview-src="beat previews/(swag) 206 f#min @rajvosa @mzle @prod.el1ass.mp3"
+                    data-preview-collab='produced with <a class="preview-partner" href="https://www.instagram.com/mzlebeats/" target="_blank" rel="noreferrer">@mzlebeats</a>'
+                  >
+                    <span class="finder-row-name"><span class="finder-row-name-text">preview-01.mp3</span></span>
+                    <span class="finder-row-collab">@mzlebeats</span>
+                    <span class="finder-row-kind">MP3</span>
+                  </button>
+
+                  <button
+                    class="finder-row"
+                    type="button"
+                    data-preview-label="preview-02.mp3"
+                    data-preview-src="beat previews/(1019) maka knacker 110 c#min @ProdCetus @prod.el1ass.mp3"
+                    data-preview-collab='produced with <a class="preview-partner" href="https://www.instagram.com/prodcetus/" target="_blank" rel="noreferrer">@ProdCetus</a>'
+                  >
+                    <span class="finder-row-name"><span class="finder-row-name-text">preview-02.mp3</span></span>
+                    <span class="finder-row-collab">@ProdCetus</span>
+                    <span class="finder-row-kind">MP3</span>
+                  </button>
+
+                  <button
+                    class="finder-row"
+                    type="button"
+                    data-preview-label="preview-03.mp3"
+                    data-preview-src="beat previews/supply 164bpm @prod.el1ass @prod.ots.mp3"
+                    data-preview-collab='produced with <a class="preview-partner" href="https://www.instagram.com/prod.ots/" target="_blank" rel="noreferrer">@prod.ots</a>'
+                  >
+                    <span class="finder-row-name"><span class="finder-row-name-text">preview-03.mp3</span></span>
+                    <span class="finder-row-collab">@prod.ots</span>
+                    <span class="finder-row-kind">MP3</span>
+                  </button>
+
+                  <button
+                    class="finder-row"
+                    type="button"
+                    data-preview-label="preview-04.mp3"
+                    data-preview-src="beat previews/(jazz, lofi) mood 64 ebmin @ties.wav @prod.el1ass.mp3"
+                    data-preview-collab='produced with <a class="preview-partner" href="https://www.instagram.com/ties.wav/" target="_blank" rel="noreferrer">@ties.wav</a>'
+                  >
+                    <span class="finder-row-name"><span class="finder-row-name-text">preview-04.mp3</span></span>
+                    <span class="finder-row-collab">@ties.wav</span>
+                    <span class="finder-row-kind">MP3</span>
+                  </button>
+
+                  <button
+                    class="finder-row"
+                    type="button"
+                    data-preview-label="preview-05.mp3"
+                    data-preview-src="beat previews/(guitar) lumina 164 bmin @bughi.35 @prod.muc4 @prod.el1ass.mp3"
+                    data-preview-collab='produced with <a class="preview-partner" href="https://www.instagram.com/bughi.35/" target="_blank" rel="noreferrer">@bughi.35</a> &amp; <a class="preview-partner" href="https://www.instagram.com/prod.muc4/" target="_blank" rel="noreferrer">@prod.muc4</a>'
+                  >
+                    <span class="finder-row-name"><span class="finder-row-name-text">preview-05.mp3</span></span>
+                    <span class="finder-row-collab">@bughi.35 &amp; @prod.muc4</span>
+                    <span class="finder-row-kind">MP3</span>
+                  </button>
+                </div>
+
+                <div class="finder-player">
+                  <p class="preview-collab" id="finderCollab"></p>
+
+                  <div class="player-shell">
+                    <div class="player-main">
+                      <div class="player-controls">
+                        <div class="player-transport">
+                          <button class="player-button player-button-primary" type="button" id="finderPlayButton">Play</button>
+                          <button class="player-button" type="button" id="finderStopButton">Stop</button>
+                        </div>
+                        <label class="volume-wrap" for="finderVolume">
+                          <span>Volume</span>
+                          <input class="volume-slider" id="finderVolume" type="range" min="0" max="1" step="0.01" value="0.85">
+                          <span class="volume-value" id="finderVolumeReadout">85%</span>
+                        </label>
+                      </div>
+                      <div class="progress-wrap">
+                        <div class="player-status">
+                          <span id="finderCurrentLabel">preview-01.mp3</span>
+                          <span><span id="finderCurrentTime">0:00</span> / <span id="finderDuration">0:00</span></span>
+                        </div>
+                        <input class="progress-slider" id="finderSeek" type="range" min="0" max="100" step="0.1" value="0" aria-label="Seek preview">
+                      </div>
+                    </div>
+                  </div>
+
+                  <audio id="finderAudio" preload="metadata"></audio>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <script>
+    const canUseCustomCursor = window.matchMedia("(pointer: fine)").matches && window.innerWidth > 720;
+    const cursorDot = document.querySelector(".cursor-dot");
+    const cursorRing = document.querySelector(".cursor-ring");
+
+    if (canUseCustomCursor) {
+      document.body.classList.add("cursor-enabled");
+
+      let ringX = window.innerWidth / 2;
+      let ringY = window.innerHeight / 2;
+      let mouseX = ringX;
+      let mouseY = ringY;
+
+      const renderCursor = () => {
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+
+        cursorDot.style.transform = "translate(" + mouseX + "px, " + mouseY + "px) translate(-50%, -50%)";
+        cursorRing.style.transform = "translate(" + ringX + "px, " + ringY + "px) translate(-50%, -50%)";
+
+        requestAnimationFrame(renderCursor);
+      };
+
+      window.addEventListener("mousemove", (event) => {
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+      });
+
+      document.querySelectorAll("a, button, input, label, .artist-card, .finder-row, .finder-sidebar-item").forEach((element) => {
+        element.addEventListener("mouseenter", () => document.body.classList.add("cursor-hover"));
+        element.addEventListener("mouseleave", () => document.body.classList.remove("cursor-hover"));
+      });
+
+      window.addEventListener("mouseleave", () => {
+        document.body.classList.remove("cursor-enabled");
+      });
+
+      window.addEventListener("mouseenter", () => {
+        document.body.classList.add("cursor-enabled");
+      });
+
+      renderCursor();
+    }
+
+    const formatTime = (seconds) => {
+      if (!Number.isFinite(seconds)) return "0:00";
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return mins + ":" + String(secs).padStart(2, "0");
+    };
+
+    const encodeFilePath = (path) =>
+      path
+        .split("/")
+        .map((segment) => encodeURIComponent(segment))
+        .join("/");
+
+    const finderAudio = document.getElementById("finderAudio");
+    const finderRows = Array.from(document.querySelectorAll(".finder-row"));
+    const finderCollab = document.getElementById("finderCollab");
+    const finderCurrentLabel = document.getElementById("finderCurrentLabel");
+    const finderCurrentTime = document.getElementById("finderCurrentTime");
+    const finderDuration = document.getElementById("finderDuration");
+    const finderSeek = document.getElementById("finderSeek");
+    const finderVolume = document.getElementById("finderVolume");
+    const finderVolumeReadout = document.getElementById("finderVolumeReadout");
+    const finderPlayButton = document.getElementById("finderPlayButton");
+    const finderStopButton = document.getElementById("finderStopButton");
+    let activeFinderRow = finderRows[0];
+
+    const updateFinderProgress = () => {
+      finderCurrentTime.textContent = formatTime(finderAudio.currentTime);
+      finderDuration.textContent = formatTime(finderAudio.duration);
+      finderSeek.value = finderAudio.duration ? (finderAudio.currentTime / finderAudio.duration) * 100 : 0;
+    };
+
+    const updateFinderVolume = (value) => {
+      finderVolumeReadout.textContent = Math.round(value * 100) + "%";
+    };
+
+    const selectFinderRow = async (row, autoplay = false) => {
+      if (!row) return;
+
+      finderRows.forEach((item) => item.classList.remove("is-active"));
+      row.classList.add("is-active");
+      activeFinderRow = row;
+
+      finderCollab.innerHTML = row.dataset.previewCollab;
+      finderCurrentLabel.textContent = row.dataset.previewLabel;
+      finderPlayButton.textContent = "Play";
+
+      finderAudio.pause();
+      finderAudio.currentTime = 0;
+      finderAudio.src = encodeFilePath(row.dataset.previewSrc);
+      finderAudio.load();
+      updateFinderProgress();
+
+      if (autoplay) {
+        try {
+          await finderAudio.play();
+          finderPlayButton.textContent = "Pause";
+        } catch {
+          finderPlayButton.textContent = "Play";
+        }
+      }
+    };
+
+    finderAudio.volume = Number(finderVolume.value);
+    updateFinderVolume(finderAudio.volume);
+    selectFinderRow(activeFinderRow);
+
+    finderRows.forEach((row) => {
+      row.addEventListener("click", () => {
+        const shouldAutoplay = activeFinderRow !== row || finderAudio.paused;
+        selectFinderRow(row, shouldAutoplay);
+      });
+    });
+
+    finderPlayButton.addEventListener("click", async () => {
+      if (!finderAudio.src && activeFinderRow) {
+        selectFinderRow(activeFinderRow);
+      }
+
+      if (finderAudio.paused) {
+        try {
+          await finderAudio.play();
+          finderPlayButton.textContent = "Pause";
+        } catch {
+          finderPlayButton.textContent = "Play";
+        }
+      } else {
+        finderAudio.pause();
+        finderPlayButton.textContent = "Play";
+      }
+    });
+
+    finderStopButton.addEventListener("click", () => {
+      finderAudio.pause();
+      finderAudio.currentTime = 0;
+      finderPlayButton.textContent = "Play";
+      updateFinderProgress();
+    });
+
+    finderVolume.addEventListener("input", () => {
+      finderAudio.volume = Number(finderVolume.value);
+      updateFinderVolume(finderAudio.volume);
+    });
+
+    finderSeek.addEventListener("input", () => {
+      if (!finderAudio.duration) return;
+      finderAudio.currentTime = (Number(finderSeek.value) / 100) * finderAudio.duration;
+      updateFinderProgress();
+    });
+
+    finderAudio.addEventListener("loadedmetadata", updateFinderProgress);
+    finderAudio.addEventListener("timeupdate", updateFinderProgress);
+    finderAudio.addEventListener("ended", () => {
+      finderAudio.currentTime = 0;
+      finderPlayButton.textContent = "Play";
+      updateFinderProgress();
+    });
+  </script>
+</body>
+</html>
