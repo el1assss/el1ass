@@ -6,18 +6,8 @@
   <title>el1ass</title>
   <meta
     name="description"
-    content="EL1ASS is a 17-year-old German multi-genre producer and mix & mastering engineer. Explore credits, beat previews, SoundCloud, Instagram and kit store."
+    content="EL1ASS music producer, mix and mastering engineer. Credits, beat previews, SoundCloud, Instagram and kit store."
   >
-  <meta name="theme-color" content="#131936">
-  <meta property="og:title" content="el1ass | Producer & Mix Engineer">
-  <meta property="og:description" content="17-year-old German multi-genre producer and mix & mastering engineer. Credits, previews and direct links in one place.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="weblogo.png">
-  <meta property="og:image:alt" content="el1ass logo">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="el1ass | Producer & Mix Engineer">
-  <meta name="twitter:description" content="17-year-old German multi-genre producer and mix & mastering engineer. Credits, previews and direct links in one place.">
-  <meta name="twitter:image" content="weblogo.png">
   <link rel="icon" type="image/png" href="weblogo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,24 +15,6 @@
     href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
     rel="stylesheet"
   >
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "elias (el1ass)",
-      "alternateName": "el1ass",
-      "description": "17-year-old German multi-genre producer and mix & mastering engineer.",
-      "jobTitle": ["Music Producer", "Mix & Mastering Engineer"],
-      "nationality": "German",
-      "image": "weblogo.png",
-      "sameAs": [
-        "https://www.instagram.com/prod.el1ass/",
-        "https://soundcloud.com/el1asss",
-        "https://payhip.com/el1ass"
-      ],
-      "knowsAbout": ["Music Production", "Mixing", "Mastering", "Beat Production"]
-    }
-  </script>
   <style>
     :root {
       --bg: #131936;
@@ -51,13 +23,10 @@
       --card: rgba(255, 255, 255, 0.06);
       --card-strong: rgba(255, 255, 255, 0.08);
       --line: rgba(255, 255, 255, 0.12);
-      --line-strong: rgba(255, 255, 255, 0.2);
-      --edge: rgba(255, 255, 255, 0.1);
       --text: #f5f7ff;
       --muted: #a9b3da;
       --accent: #7fb3ff;
       --accent-soft: rgba(127, 179, 255, 0.16);
-      --shadow: 0 26px 90px rgba(8, 12, 35, 0.3);
       --max: 1180px;
       --radius: 28px;
       --window-h: min(72svh, 760px);
@@ -84,29 +53,17 @@
       scroll-snap-type: y mandatory;
     }
 
-    body::before,
-    body::after {
+    body::before {
       content: "";
       position: fixed;
       inset: 0;
-      pointer-events: none;
-    }
-
-    body::before {
       background:
         linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
       background-size: 42px 42px;
       mask-image: radial-gradient(circle at center, black, transparent 82%);
+      pointer-events: none;
       opacity: 0.18;
-    }
-
-    body::after {
-      background:
-        radial-gradient(circle at 12% 10%, rgba(255, 255, 255, 0.07), transparent 22%),
-        radial-gradient(circle at 90% 0%, rgba(127, 179, 255, 0.12), transparent 26%);
-      mix-blend-mode: screen;
-      opacity: 0.8;
     }
 
     body.cursor-enabled,
@@ -203,14 +160,8 @@
 
     h1,
     h2,
-    h3,
-    p {
-      margin: 0;
-    }
-
-    h1,
-    h2,
     h3 {
+      margin: 0;
       font-family: "Space Grotesk", sans-serif;
       letter-spacing: -0.05em;
     }
@@ -228,48 +179,17 @@
 
     .hero-panel,
     .window-card,
-    .artist-card,
-    .finder-window,
-    .player-shell {
-      position: relative;
-      isolation: isolate;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.04));
+    .artist-card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.05));
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      backdrop-filter: blur(24px) saturate(150%);
-      box-shadow:
-        var(--shadow),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
-    }
-
-    .hero-panel::before,
-    .window-card::before,
-    .artist-card::before,
-    .finder-window::before,
-    .player-shell::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 22%),
-        radial-gradient(circle at top left, rgba(255, 255, 255, 0.07), transparent 26%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .hero-panel > *,
-    .window-card > *,
-    .artist-card > *,
-    .finder-window > *,
-    .player-shell > * {
-      position: relative;
-      z-index: 1;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 26px 90px rgba(8, 12, 35, 0.3);
     }
 
     .hero-panel {
       padding: 24px 26px;
+      position: relative;
       overflow: hidden;
     }
 
@@ -287,7 +207,7 @@
 
     .lead {
       max-width: 34rem;
-      margin-top: 14px;
+      margin: 14px 0 0;
       color: var(--muted);
       line-height: 1.65;
       font-size: 0.96rem;
@@ -312,17 +232,15 @@
       color: var(--text);
       font-size: 0.95rem;
       font-weight: 700;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
       transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
     }
 
     .button:hover,
     .artist-card:hover,
     .finder-row:hover,
-    .player-button:hover,
-    .finder-library-toggle:hover {
+    .player-button:hover {
       transform: translateY(-2px);
-      border-color: var(--line-strong);
+      border-color: rgba(255, 255, 255, 0.26);
     }
 
     .button-primary,
@@ -410,21 +328,20 @@
     }
 
     .artist-track {
-      margin-top: 10px;
+      margin: 10px 0 0;
       color: var(--muted);
       line-height: 1.65;
       font-size: 0.93rem;
     }
 
     .finder-window {
-      height: 100%;
       overflow: hidden;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.04));
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.055);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 24px;
-      box-shadow:
-        0 24px 80px rgba(5, 10, 30, 0.28),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 24px 80px rgba(5, 10, 30, 0.28);
+      height: 100%;
     }
 
     .finder-titlebar,
@@ -481,22 +398,6 @@
       text-align: right;
     }
 
-    .finder-library-toggle {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      min-height: 38px;
-      padding: 0 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text);
-      font: inherit;
-      font-size: 0.84rem;
-      font-weight: 700;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    }
-
     .finder-body {
       display: grid;
       grid-template-columns: 220px 1fr;
@@ -507,7 +408,6 @@
       padding: 14px;
       border-right: 1px solid rgba(255, 255, 255, 0.08);
       background: rgba(255, 255, 255, 0.025);
-      transition: max-height 220ms ease, opacity 220ms ease, transform 220ms ease, padding 220ms ease, border-color 220ms ease;
     }
 
     .finder-sidebar-label {
@@ -620,7 +520,7 @@
     .finder-player {
       padding: 14px 16px 16px;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.025));
+      background: rgba(255, 255, 255, 0.025);
       display: grid;
       gap: 12px;
     }
@@ -639,7 +539,8 @@
     .player-shell {
       padding: 14px;
       border-radius: 18px;
-      overflow: hidden;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .player-main {
@@ -829,7 +730,6 @@
       .window-card,
       .finder-window {
         height: auto;
-        overflow: visible;
       }
 
       .credits-shell,
@@ -885,8 +785,6 @@
 
       .finder-toolbar {
         gap: 8px;
-        align-items: center;
-        flex-wrap: wrap;
       }
 
       .finder-breadcrumb,
@@ -894,32 +792,12 @@
         font-size: 0.84rem;
       }
 
-      .finder-count {
-        margin-left: auto;
-      }
-
-      .finder-library-toggle {
-        display: inline-flex;
-      }
-
       .finder-sidebar {
         display: flex;
         align-items: center;
         gap: 8px;
         overflow-x: auto;
-        padding: 0 12px;
-        max-height: 0;
-        opacity: 0;
-        transform: translateY(-8px);
-        border-bottom: 0;
-      }
-
-      .finder-sidebar.is-open {
         padding: 10px 12px;
-        max-height: 72px;
-        opacity: 1;
-        transform: translateY(0);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       }
 
       .finder-sidebar-label {
@@ -941,7 +819,6 @@
       .finder-list {
         padding: 8px;
         gap: 8px;
-        touch-action: pan-y;
       }
 
       .finder-row {
@@ -960,20 +837,6 @@
 
       .finder-row-kind {
         display: none;
-      }
-
-      .finder-player {
-        position: sticky;
-        bottom: 8px;
-        z-index: 8;
-        margin: 0 8px 8px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 20px;
-        background: rgba(16, 22, 51, 0.92);
-        backdrop-filter: blur(24px) saturate(160%);
-        box-shadow:
-          0 18px 40px rgba(6, 10, 30, 0.34),
-          inset 0 1px 0 rgba(255, 255, 255, 0.08);
       }
 
       .player-shell {
@@ -1126,13 +989,12 @@
             </div>
 
             <div class="finder-toolbar">
-              <button class="finder-library-toggle" type="button" id="finderLibraryToggle" aria-expanded="false" aria-controls="finderSidebar">Beat library</button>
               <span class="finder-breadcrumb">elias / previews</span>
               <span class="finder-count">5 items</span>
             </div>
 
             <div class="finder-body">
-              <aside class="finder-sidebar" id="finderSidebar" aria-label="Preview library">
+              <aside class="finder-sidebar" aria-label="Preview library">
                 <p class="finder-sidebar-label">Library</p>
                 <div class="finder-sidebar-item is-active">All previews</div>
                 <div class="finder-sidebar-item">Collaborations</div>
@@ -1305,9 +1167,6 @@
         .join("/");
 
     const finderAudio = document.getElementById("finderAudio");
-    const finderList = document.querySelector(".finder-list");
-    const finderSidebar = document.getElementById("finderSidebar");
-    const finderLibraryToggle = document.getElementById("finderLibraryToggle");
     const finderRows = Array.from(document.querySelectorAll(".finder-row"));
     const finderCollab = document.getElementById("finderCollab");
     const finderCurrentLabel = document.getElementById("finderCurrentLabel");
@@ -1319,23 +1178,6 @@
     const finderPlayButton = document.getElementById("finderPlayButton");
     const finderStopButton = document.getElementById("finderStopButton");
     let activeFinderRow = finderRows[0];
-    let finderSidebarOpen = false;
-    let touchStartX = 0;
-    let touchStartY = 0;
-
-    const isMobileFinder = () => window.matchMedia("(max-width: 720px)").matches;
-
-    const syncFinderSidebar = () => {
-      if (!finderSidebar || !finderLibraryToggle) return;
-      const shouldOpen = !isMobileFinder() || finderSidebarOpen;
-      finderSidebar.classList.toggle("is-open", shouldOpen);
-      finderLibraryToggle.setAttribute("aria-expanded", String(shouldOpen));
-    };
-
-    const setFinderSidebarOpen = (value) => {
-      finderSidebarOpen = value;
-      syncFinderSidebar();
-    };
 
     const updateFinderProgress = () => {
       finderCurrentTime.textContent = formatTime(finderAudio.currentTime);
@@ -1372,22 +1214,11 @@
           finderPlayButton.textContent = "Play";
         }
       }
-
-      if (isMobileFinder()) {
-        setFinderSidebarOpen(false);
-      }
     };
 
     finderAudio.volume = Number(finderVolume.value);
     updateFinderVolume(finderAudio.volume);
-    syncFinderSidebar();
     selectFinderRow(activeFinderRow);
-
-    if (finderLibraryToggle) {
-      finderLibraryToggle.addEventListener("click", () => {
-        setFinderSidebarOpen(!finderSidebarOpen);
-      });
-    }
 
     finderRows.forEach((row) => {
       row.addEventListener("click", () => {
@@ -1395,33 +1226,6 @@
         selectFinderRow(row, shouldAutoplay);
       });
     });
-
-    if (finderList) {
-      finderList.addEventListener("touchstart", (event) => {
-        const touch = event.changedTouches[0];
-        touchStartX = touch.clientX;
-        touchStartY = touch.clientY;
-      }, { passive: true });
-
-      finderList.addEventListener("touchend", (event) => {
-        const touch = event.changedTouches[0];
-        const deltaX = touch.clientX - touchStartX;
-        const deltaY = touch.clientY - touchStartY;
-
-        if (Math.abs(deltaX) < 46 || Math.abs(deltaX) < Math.abs(deltaY)) {
-          return;
-        }
-
-        const currentIndex = finderRows.indexOf(activeFinderRow);
-        const nextIndex = deltaX < 0
-          ? Math.min(currentIndex + 1, finderRows.length - 1)
-          : Math.max(currentIndex - 1, 0);
-
-        if (nextIndex !== currentIndex) {
-          selectFinderRow(finderRows[nextIndex], true);
-        }
-      }, { passive: true });
-    }
 
     finderPlayButton.addEventListener("click", async () => {
       if (!finderAudio.src && activeFinderRow) {
@@ -1466,8 +1270,6 @@
       finderPlayButton.textContent = "Play";
       updateFinderProgress();
     });
-
-    window.addEventListener("resize", syncFinderSidebar);
   </script>
 </body>
 </html>
